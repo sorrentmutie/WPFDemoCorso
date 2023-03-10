@@ -1,4 +1,5 @@
 ﻿using DemoCorso.Data;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,17 +22,25 @@ namespace DemoCorso
     /// </summary>
     public partial class MainWindow : Window
     {
-        private GestioneOrdini? gestioneOrdine = null;
-        public MainWindow()
+        private readonly IGestioneOrdini? gestioneOrdine = null;
+        private readonly IConfiguration configuration;
+
+        // private GestioneOrdini? gestioneOrdine = null;
+        public MainWindow(IGestioneOrdini gestioneOrdine, IConfiguration configuration)
         {
+            this.gestioneOrdine = gestioneOrdine;
+            this.configuration = configuration;
             InitializeComponent();
-            IGestioneNotifiche gestioneNotifiche = null;
-            gestioneOrdine = new GestioneOrdini(gestioneNotifiche);
+
+            // IGestioneNotifiche gestioneNotifiche = new GestioneNotificheMock();
+            // gestioneOrdine = new GestioneOrdini(gestioneNotifiche);
         }
 
         private void InviaOrdine(object sender, RoutedEventArgs e)
         {
-            
+
+            var valore = configuration["Prova"];
+
             gestioneOrdine!.CreaOrdine(new Ordine
             {
                 Id = 1,
