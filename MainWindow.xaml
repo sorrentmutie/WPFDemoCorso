@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:DemoCorso"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <StackPanel>
+        <Button Click="InviaOrdine">Spedisci Ordini</Button>
+        <Label x:Name="ordiniTotali"></Label>
+    </StackPanel>
 </Window>
