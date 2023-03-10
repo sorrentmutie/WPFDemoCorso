@@ -1,7 +1,9 @@
-﻿using DemoCorso.Data;
+﻿using DemoCorso.Business;
+using DemoCorso.Data;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,12 +27,21 @@ namespace DemoCorso
         private readonly IGestioneOrdini? gestioneOrdine = null;
         private readonly IConfiguration configuration;
 
+        public ObservableCollection<Student>? Students { get; set; }
+
+
+
         // private GestioneOrdini? gestioneOrdine = null;
         public MainWindow(IGestioneOrdini gestioneOrdine, IConfiguration configuration)
         {
             this.gestioneOrdine = gestioneOrdine;
             this.configuration = configuration;
             InitializeComponent();
+            // myStackPanel.DataContext = new MyFakeData();
+            var data = new MyFakeData();
+            Students = new ObservableCollection<Student>();
+            Students = data.ObservableStudents;
+            //myListBox.DataContext = Students;
 
             // IGestioneNotifiche gestioneNotifiche = new GestioneNotificheMock();
             // gestioneOrdine = new GestioneOrdini(gestioneNotifiche);
@@ -38,7 +49,6 @@ namespace DemoCorso
 
         private void InviaOrdine(object sender, RoutedEventArgs e)
         {
-
             var valore = configuration["Prova"];
 
             gestioneOrdine!.CreaOrdine(new Ordine
@@ -55,6 +65,16 @@ namespace DemoCorso
             });
             var totaleOrdine = gestioneOrdine.NumeroOrdiniCreati;
             ordiniTotali.Content = totaleOrdine;
+
+            Students.Add(new Student { Id = 4, Name = "Maria" });
+
+            //var myData = (MyFakeData)myStackPanel.DataContext;
+            //if(myData != null && myData.Students != null)
+            //{
+            //    myData.ObservableStudents.Add(new Student { Id = 4, Name = "Maria" });
+            //   // myData.Students.Add(new Student { Id = 4, Name = "Maria" });
+            //}
+
         }
     }
 }

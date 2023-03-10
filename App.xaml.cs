@@ -22,6 +22,7 @@ namespace DemoCorso
                 {
                     services.AddSingleton<IGestioneNotifiche, GestioneNotificheMock>();
                     services.AddSingleton<IGestioneOrdini, GestioneOrdini>();
+                    //  services.AddTransient<IGestioneOrdini, GestioneOrdini>()
                     services.AddSingleton<MainWindow>();
                 })
                 .Build();

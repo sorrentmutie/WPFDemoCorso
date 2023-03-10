@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DemoCorso.Business\DemoCorso.Business.csproj" />
     <ProjectReference Include="..\DemoCorso.Data\DemoCorso.Data.csproj" />
   </ItemGroup>
 

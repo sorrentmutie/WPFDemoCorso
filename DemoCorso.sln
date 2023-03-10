@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoCorso", "DemoCorso.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoCorso.Data", "..\DemoCorso.Data\DemoCorso.Data.csproj", "{296C0312-02E5-4BD0-B6ED-A2C48A726416}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoCorso.Business", "..\DemoCorso.Business\DemoCorso.Business.csproj", "{069F2E8D-51A7-417D-8081-DFD9C321EF2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{296C0312-02E5-4BD0-B6ED-A2C48A726416}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{296C0312-02E5-4BD0-B6ED-A2C48A726416}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{296C0312-02E5-4BD0-B6ED-A2C48A726416}.Release|Any CPU.Build.0 = Release|Any CPU
+		{069F2E8D-51A7-417D-8081-DFD9C321EF2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{069F2E8D-51A7-417D-8081-DFD9C321EF2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{069F2E8D-51A7-417D-8081-DFD9C321EF2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{069F2E8D-51A7-417D-8081-DFD9C321EF2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

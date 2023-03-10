@@ -3,11 +3,48 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DemoCorso"
+        xmlns:business="clr-namespace:DemoCorso.Business;assembly=DemoCorso.Business"
+        xmlns:converters="clr-namespace:DemoCorso.Converters"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-        <Button Click="InviaOrdine">Spedisci Ordini</Button>
+    <Window.Resources>
+        <!--<business:MyFakeData x:Key="myFakeData"></business:MyFakeData>-->
+        <converters:NegateConverter x:Key="negate"></converters:NegateConverter>
+    </Window.Resources>
+    <StackPanel x:Name="myStackPanel">
+        <Button x:Name="myButton" Click="InviaOrdine" Background="{Binding ColorName}">Spedisci Ordini</Button>
         <Label x:Name="ordiniTotali"></Label>
+        <TextBox x:Name="txtValue" Width="130" ></TextBox>
+        <TextBlock Text="{Binding ElementName=txtValue, Path=Text}"  ></TextBlock>
+
+        <Slider Minimum="0" Maximum="360" x:Name="mySlider"></Slider>
+
+
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Ciaooooo">
+            <TextBlock.LayoutTransform>
+                <RotateTransform Angle="{Binding ElementName=mySlider, Path=Value}"></RotateTransform>
+            </TextBlock.LayoutTransform>
+        </TextBlock>
+
+
+        <CheckBox IsChecked="{Binding Checked}">Checkbox 1</CheckBox>
+
+        <CheckBox IsChecked="{Binding Checked, Converter={StaticResource negate}}">Checkbox 2</CheckBox>
+
+
+        <ListBox  ItemsSource="{Binding Students}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Foreground="Orange" FontSize="36" Text="{Binding Id}"></TextBlock>
+                        <TextBlock Foreground="Blue" Text="{Binding Name}" ></TextBlock>
+                        <TextBlock Foreground="Blue" Text="{Binding Surname}" ></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        
+
     </StackPanel>
 </Window>
