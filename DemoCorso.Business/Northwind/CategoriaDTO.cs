@@ -1,8 +1,32 @@
-﻿namespace DemoCorso.Business.Northwind;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 
-public class CategoriaDTO
+namespace DemoCorso.Business.Northwind;
+
+public class CategoriaDTO: INotifyPropertyChanged
 {
-    public int Id { get; set; }  
-    public string? Nome { get; set; }
+    public int Id { get; set; }
+    private string? nome;
+    public string? Nome
+    {
+        get { return nome; }
+        set
+        {
+            if (value != nome)
+            {
+                nome = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
     public int NumeroProdotti { get; set; }
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 }
