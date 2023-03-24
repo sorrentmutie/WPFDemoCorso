@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <StackPanel x:Name="myStackPanel">
-        <Button Click="Button_Click">Aggiungi</Button>
+        <Button Click="Button_Click">Carica</Button>
         <!--<ListBox ItemsSource="{Binding Students}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -19,14 +19,14 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>-->
-        <DataGrid ItemsSource="{Binding Students}"></DataGrid>
+        <DataGrid ItemsSource="{Binding Categorie}"></DataGrid>
 
-        <StackPanel>
+        <!--<StackPanel>
             <Label Content="{Binding BestStudent.Name}"></Label>
             <TextBox Text="{Binding BestStudent.Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Label Content="{Binding BestStudent.Surname}"></Label>
             <TextBox Text="{Binding BestStudent.Surname, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        </StackPanel>
+        </StackPanel>-->
         
     </StackPanel>
 </Window>

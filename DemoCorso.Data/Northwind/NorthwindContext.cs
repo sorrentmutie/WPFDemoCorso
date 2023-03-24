@@ -352,4 +352,11 @@ public partial class NorthwindContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.LogTo(Console.WriteLine);
+        base.OnConfiguring(optionsBuilder);
+    }
 }

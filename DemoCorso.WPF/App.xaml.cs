@@ -6,6 +6,10 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Configuration;
 using DemoCorso.Business;
+using DemoCorso.Data.Northwind;
+using Microsoft.EntityFrameworkCore;
+using DemoCorso.Business.Northwind;
+using DemoCorso.Services;
 
 namespace DemoCorso
 {
@@ -18,6 +22,12 @@ namespace DemoCorso
 
         public App()
         {
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            var configuration = builder!.Build();
+            var connectionString = configuration.GetConnectionString("Northwind");
+
             AppHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((h, services) =>
                 {
@@ -26,15 +36,12 @@ namespace DemoCorso
                     //  services.AddTransient<IGestioneOrdini, GestioneOrdini>()
                     services.AddSingleton<MainWindow>();
                     services.AddSingleton<IStudentsData, StudentsData>();
+                    services.AddDbContext<NorthwindContext>(
+                         opzioni => opzioni.UseSqlServer(connectionString)    
+                    );
+                    services.AddSingleton<INorthwindData, NorthwindSQLServerData>();
                 })
                 .Build();
-
-
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-            var configuration = builder!.Build();
-            var x = configuration["Prova"];
         }
 
 

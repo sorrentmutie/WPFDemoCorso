@@ -1,6 +1,10 @@
 ﻿using DemoCorso.Business;
+using DemoCorso.Business.Northwind;
 using DemoCorso.Data;
+using DemoCorso.Data.Northwind;
 using Microsoft.Extensions.Configuration;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 
 namespace DemoCorso
@@ -10,23 +14,33 @@ namespace DemoCorso
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IGestioneOrdini? gestioneOrdine = null;
-        private readonly IConfiguration configuration;
         private readonly IStudentsData studentsData;
+        private readonly INorthwindData northwindData;
+        public ObservableCollection<CategoriaDTO> Categorie { get; set; }
+             = new();
 
-        public MainWindow(IGestioneOrdini gestioneOrdine, IConfiguration configuration,
-            IStudentsData studentsData)
+        public MainWindow(
+            IStudentsData studentsData, INorthwindData northwindData)
         {
-            this.gestioneOrdine = gestioneOrdine;
-            this.configuration = configuration;
             this.studentsData = studentsData;
+            this.northwindData = northwindData;
             InitializeComponent();
-            DataContext = studentsData;
+            //var categorie = northwindData.EstraiCategorie();
+            //foreach (var categoria in categorie)
+            //{
+            //    Categorie.Add(categoria);
+            //}
+            DataContext = this;
+
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            studentsData.AddStudent();
+            var categorie = await northwindData.EstraiCategorieAsync();
+            foreach (var categoria in categorie)
+            {
+                Categorie.Add(categoria);
+            }
         }
     }
 }
