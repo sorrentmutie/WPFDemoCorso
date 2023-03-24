@@ -7,16 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <StackPanel x:Name="myStackPanel">
-        <ListBox ItemsSource="{Binding Students}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Foreground="Orange" FontSize="36" Text="{Binding Id}"></TextBlock>
-                        <TextBlock Foreground="Blue" Text="{Binding Name}" ></TextBlock>
-                        <TextBlock Foreground="Blue" Text="{Binding Surname}" ></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Button Click="Button_Click">OK</Button>
+        <DataGrid ItemsSource="{Binding Categorie}"></DataGrid>
     </StackPanel>
 </Window>

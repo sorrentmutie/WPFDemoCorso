@@ -5,6 +5,9 @@ using System.Windows;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Configuration;
+using DemoCorso.Data.Northwind;
+using Microsoft.EntityFrameworkCore;
+using DemoCorso.Business.Northwind;
 
 namespace DemoCorso
 {
@@ -24,6 +27,13 @@ namespace DemoCorso
                     services.AddSingleton<IGestioneOrdini, GestioneOrdini>();
                     //  services.AddTransient<IGestioneOrdini, GestioneOrdini>()
                     services.AddSingleton<MainWindow>();
+                    services.AddDbContext<NorthwindContext>(
+                        opzioni =>
+                        {
+                            opzioni.UseSqlServer(@"Data Source=(LocalDb)\mssqllocaldb; Initial Catalog=Northwind; Integrated Security=True; MultipleActiveResultSets=True");
+                        });
+                    services.AddSingleton<INorthwindData, NorthwindSQLData>(); 
+
                 })
                 .Build();
 
