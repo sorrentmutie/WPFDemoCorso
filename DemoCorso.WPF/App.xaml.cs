@@ -5,6 +5,7 @@ using System.Windows;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Configuration;
+using DemoCorso.Business;
 
 namespace DemoCorso
 {
@@ -24,6 +25,7 @@ namespace DemoCorso
                     services.AddSingleton<IGestioneOrdini, GestioneOrdini>();
                     //  services.AddTransient<IGestioneOrdini, GestioneOrdini>()
                     services.AddSingleton<MainWindow>();
+                    services.AddSingleton<IStudentsData, StudentsData>();
                 })
                 .Build();
 

@@ -1,4 +1,5 @@
-﻿using DemoCorso.Data;
+﻿using DemoCorso.Business;
+using DemoCorso.Data;
 using Microsoft.Extensions.Configuration;
 using System.Windows;
 
@@ -11,12 +12,21 @@ namespace DemoCorso
     {
         private readonly IGestioneOrdini? gestioneOrdine = null;
         private readonly IConfiguration configuration;
+        private readonly IStudentsData studentsData;
 
-        public MainWindow(IGestioneOrdini gestioneOrdine, IConfiguration configuration)
+        public MainWindow(IGestioneOrdini gestioneOrdine, IConfiguration configuration,
+            IStudentsData studentsData)
         {
             this.gestioneOrdine = gestioneOrdine;
             this.configuration = configuration;
-            InitializeComponent();           
-        }       
+            this.studentsData = studentsData;
+            InitializeComponent();
+            DataContext = studentsData;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            studentsData.AddStudent();
+        }
     }
 }
