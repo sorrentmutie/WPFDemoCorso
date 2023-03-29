@@ -14,70 +14,73 @@ namespace DemoCorso.ViewModels;
 
 public class MainWindowViewModel: BaseViewModel
 {
-    private readonly INorthwindData northwindData;
-
-
-    public RelayCommand CaricaCommand { get; set; }
-    public RelayCommand AggiungiCommand { get; set; }
-    public RelayCommand DettaglioCommand { get; set; }
+    //private readonly INorthwindData northwindData;
+    //public RelayCommand CaricaCommand { get; set; }
+    //public RelayCommand AggiungiCommand { get; set; }
+    //public RelayCommand DettaglioCommand { get; set; }
+    public object? CurrentViewModel { get; set; }
+    public INorthwindData NorthwindData { get; }
 
     public MainWindowViewModel(INorthwindData northwindData)
     {
-        this.northwindData = northwindData;
-        CaricaCommand = new RelayCommand(Carica);
-        AggiungiCommand = new RelayCommand(Aggiungi);
-        DettaglioCommand = new RelayCommand(Dettaglio);
+        //this.northwindData = northwindData;
+        //CaricaCommand = new RelayCommand(Carica);
+        //AggiungiCommand = new RelayCommand(Aggiungi);
+        //DettaglioCommand = new RelayCommand(Dettaglio);
         // LoadData().Wait();
+        
+        NorthwindData = northwindData;
+        CurrentViewModel = new CategoriesListViewModel(northwindData);
     }
 
-    private async void Dettaglio()
-    {
-        var details = await northwindData.EstraiCategoriaPerIdAsync(2);
-        await northwindData.ModificaCategoria(new CategoriaDTO { Id = 2, Nome = "XCatXCat" });
-        await LoadData();
-    }
+    //private async void Dettaglio()
+    //{
+    //    var details = await northwindData.EstraiCategoriaPerIdAsync(2);
+    //    await northwindData.ModificaCategoria(new CategoriaDTO { Id = 2, Nome = "XCatXCat" });
+    //    await LoadData();
+    //}
 
-    private async void Aggiungi()
-    {
-        await northwindData.CreaCategoriaAsync(new CategoriaCreaDTO
-        {
-            Nome = "data binding 3",
-            Descrizione = "lezione su MVVM"
-        });
-        await LoadData();
-    }
+    //private async void Aggiungi()
+    //{
+    //    await northwindData.CreaCategoriaAsync(new CategoriaCreaDTO
+    //    {
+    //        Nome = "data binding 3",
+    //        Descrizione = "lezione su MVVM"
+    //    });
+    //    await LoadData();
+    //}
 
-    private async void Carica()
-    {
-        await LoadData();
-    }
+    //private async void Carica()
+    //{
+    //    await LoadData();
+    //}
 
-    CategoriaDTO? categoriaSelezionata;
-    public CategoriaDTO? CategoriaSelezionata
-    {
-        get { return categoriaSelezionata; }
-        set
-        {
-            categoriaSelezionata = value;
-            NotifyPropertyChanged();
-        }
-    }
+    //CategoriaDTO? categoriaSelezionata;
+    //public CategoriaDTO? CategoriaSelezionata
+    //{
+    //    get { return categoriaSelezionata; }
+    //    set
+    //    {
+    //        categoriaSelezionata = value;
+    //        NotifyPropertyChanged();
+    //    }
+    //}
 
-    public ObservableCollection<CategoriaDTO> Categorie { get; set; }
-           = new();
+    //public ObservableCollection<CategoriaDTO> Categorie { get; set; }
+    //       = new();
 
-    private Task LoadData()
-    {
-        Categorie.Clear();
-        var categorie = northwindData.EstraiCategorie();
-        foreach (var categoria in categorie)
-        {
-            Categorie.Add(categoria);
-        }
-        return Task.CompletedTask;
-       // return (await northwindData.EstraiCategorieAsync()).ToList();
-    }
+    //private Task LoadData()
+    //{
+    //    Categorie.Clear();
+    //    var categorie = northwindData.EstraiCategorie();
+    //    foreach (var categoria in categorie)
+    //    {
+    //        Categorie.Add(categoria);
+    //    }
+    //    return Task.CompletedTask;
+    //   // return (await northwindData.EstraiCategorieAsync()).ToList();
+    //}
 
-   
+
 
 }
